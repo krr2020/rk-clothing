@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -8,36 +7,36 @@ import { auth } from "../../firebase/utils";
 import { selectCartHidden } from "../../redux/cart/selectors";
 import { selectCurrentUser } from "../../redux/user/selectors";
 
-import "./styles.scss";
+import {
+	HeaderContainer,
+	LogoContainer,
+	OptionsContainer,
+	OptionLink,
+} from "./styles";
+// import "./styles.scss";
 import CartIcon from "../cart-icon/cart-icon";
 import CartDropdown from "../cart-dropdown/cart-dropdown";
 
 const Header = ({ currentUser, cartHidden }) => {
 	return (
-		<div className="header">
-			<Link className="logo-container" to="/">
+		<HeaderContainer>
+			<LogoContainer to="/">
 				<Logo className="logo" />
-			</Link>
-			<div className="options">
-				<Link className="option" to="/shop">
-					SHOP
-				</Link>
-				<Link className="option" to="/contact">
-					CONTACT
-				</Link>
+			</LogoContainer>
+			<OptionsContainer>
+				<OptionLink to="/shop">SHOP</OptionLink>
+				<OptionLink to="/contact">CONTACT</OptionLink>
 				{!!currentUser ? (
-					<div className="option" onClick={() => auth.signOut()}>
+					<OptionLink as="div" onClick={() => auth.signOut()}>
 						SIGN OUT
-					</div>
+					</OptionLink>
 				) : (
-					<Link className="option" to="/auth">
-						SIGN IN
-					</Link>
+					<OptionLink to="/auth">SIGN IN</OptionLink>
 				)}
 				<CartIcon />
-			</div>
+			</OptionsContainer>
 			{cartHidden ? null : <CartDropdown />}
-		</div>
+		</HeaderContainer>
 	);
 };
 
