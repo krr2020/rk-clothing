@@ -82,9 +82,19 @@ export const convertCollectionsSnapshotToMap = (collections) => {
 	}, {});
 };
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({
+export const getCurrentUser = () => {
+	return new Promise((res, rej) => {
+		const unsubscribeFromAuth = auth.onAuthStateChanged((userAuth) => {
+			unsubscribeFromAuth();
+
+			res(userAuth);
+		}, rej);
+	});
+};
+
+export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+googleAuthProvider.setCustomParameters({
 	prompt: "select_account",
 });
 
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const signInWithGoogle = () => auth.signInWithPopup(googleAuthProvider);

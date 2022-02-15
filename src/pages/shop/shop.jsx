@@ -5,7 +5,7 @@ import { Route } from "react-router-dom";
 import CollectionsOverviewContainer from "../../components/collections-overview/container";
 import CollectionPageContainer from "../collection/container";
 
-import { fetchCollectionsStartAsync } from "../../redux/shop/actions";
+import { fetchCollectionsStart } from "../../redux/shop/actions";
 
 class ShopPage extends React.Component {
 	componentDidMount() {
@@ -35,7 +35,7 @@ class ShopPage extends React.Component {
 
 const maspDispatchToProps = (dispatch) => {
 	return {
-		fetchCollections: () => dispatch(fetchCollectionsStartAsync()),
+		fetchCollections: () => dispatch(fetchCollectionsStart()),
 	};
 };
 
